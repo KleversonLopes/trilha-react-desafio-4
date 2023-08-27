@@ -18,42 +18,48 @@ const schema = yup
   .required();
 
 const Login = () => {
-  const {
-    control,
-    formState: { errors, isValid },
-  } = useForm<IFormLogin>({
-    resolver: yupResolver(schema),
-    mode: "onBlur",
-    defaultValues,
-    reValidateMode: "onChange",
-  });
+    const {
+        control,
+        formState: { errors, isValid },
+    } = useForm<IFormLogin>({
+        resolver: yupResolver(schema),
+        mode: "onBlur",
+        defaultValues,
+        reValidateMode: "onChange",
+    });
 
-  return (
-    <Container>
-      <LoginContainer>
-        <Column>
-          <Title>Login</Title>
-          <Spacing />
-          <Input
-            name="email"
-            placeholder="Email"
-            control={control}
-            errorMessage={errors?.email?.message}
-          />
-          <Spacing />
-          <Input
-            name="password"
-            type="password"
-            placeholder="Senha"
-            control={control}
-            errorMessage={errors?.password?.message}
-          />
-          <Spacing />
-          <Button title="Entrar" />
-        </Column>
-      </LoginContainer>
-    </Container>
-  );
+    console.log('isValid', isValid)
+
+    return (
+        <Container>
+        <LoginContainer>
+            <Column>
+            <Title>Login</Title>
+            <Spacing />
+            <Input
+                name="email"
+                placeholder="Email"
+                control={control}
+                errorMessage={errors?.email?.message}
+            />
+            <Spacing />
+            <Input
+                name="password"
+                type="password"
+                placeholder="Senha"
+                control={control}
+                errorMessage={errors?.password?.message}
+            />
+            <Spacing />
+            <Button 
+                title="Entrar" 
+                disabled={isValid ? false : true}
+                onClick={() => alert('Clicou em entrar')}
+            />
+            </Column>
+        </LoginContainer>
+        </Container>
+    );
 };
 
 export default Login;
